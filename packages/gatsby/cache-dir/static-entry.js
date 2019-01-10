@@ -236,7 +236,7 @@ export default (pagePath, callback) => {
   scriptsAndStyles = uniqBy(scriptsAndStyles, item => item.name)
 
   const scripts = scriptsAndStyles.filter(
-    script => script.name && script.name.endsWith(`.js`)
+    script => script.name && (script.name.endsWith(`.js`) || script.name.endsWith(`.mjs`))
   )
   const styles = scriptsAndStyles.filter(
     style => style.name && style.name.endsWith(`.css`)
@@ -356,7 +356,7 @@ export default (pagePath, callback) => {
       1,
       -1
     )}`
-    return <script key={scriptPath} src={scriptPath} async />
+    return <script key={scriptPath} src={scriptPath} async type="module" />
   })
 
   postBodyComponents.push(...bodyScripts)

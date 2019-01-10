@@ -13,8 +13,20 @@ const loadCachedConfig = () => {
   return pluginBabelConfig
 }
 
+const modernConfig = {
+  loose: false,
+  targets: {
+    esmodules: true,
+  },
+  useBuiltIns: false,
+}
+
 module.exports = function preset(_, options = {}) {
-  let { targets = null } = options
+  if (process.env.MODERN) {
+    options = modernConfig
+  }
+
+  let { targets = null, loose = true, useBuiltIns = `usage` } = options
 
   const pluginBabelConfig = loadCachedConfig()
   const stage = process.env.GATSBY_BUILD_STAGE || `test`
@@ -34,10 +46,11 @@ module.exports = function preset(_, options = {}) {
       [
         resolve(`@babel/preset-env`),
         {
-          loose: true,
+          loose,
           modules: stage === `test` ? `commonjs` : false,
-          useBuiltIns: `usage`,
+          useBuiltIns,
           targets,
+          debug: true,
         },
       ],
       [

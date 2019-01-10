@@ -76,7 +76,9 @@ async function startServer(program) {
     program,
     directory,
     `develop`,
-    program.port
+    {
+      webpackPort: program.port
+    }
   )
 
   const compiler = webpack(devConfig)
