@@ -16,7 +16,7 @@ module.exports = async program => {
     program,
     directory,
     `build-javascript`,
-    { modern: true, }
+    { modern: true }
   )
 
   return new Promise((resolve, reject) => {

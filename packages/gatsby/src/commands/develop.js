@@ -72,14 +72,9 @@ async function startServer(program) {
 
   await createIndexHtml()
 
-  const devConfig = await webpackConfig(
-    program,
-    directory,
-    `develop`,
-    {
-      webpackPort: program.port
-    }
-  )
+  const devConfig = await webpackConfig(program, directory, `develop`, {
+    webpackPort: program.port,
+  })
 
   const compiler = webpack(devConfig)
 

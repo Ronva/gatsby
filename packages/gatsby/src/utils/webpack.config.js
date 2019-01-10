@@ -24,8 +24,9 @@ module.exports = async (
   program,
   directory,
   suppliedStage,
+  /* eslint-disable */
   customOptions: {
-    webpackPort: 1500
+    webpackPort: 1500,
   } = {}
 ) => {
   const directoryPath = withBasePath(directory)
@@ -111,9 +112,9 @@ module.exports = async (
           // Point sourcemap entries to original disk location (format as URL on Windows)
           publicPath:
             process.env.GATSBY_WEBPACK_PUBLICPATH ||
-            `${program.ssl ? `https` : `http`}://${
-              program.host
-            }:${customOptions.webpackPort}/`,
+            `${program.ssl ? `https` : `http`}://${program.host}:${
+              customOptions.webpackPort
+            }/`,
           devtoolModuleFilenameTemplate: info =>
             path.resolve(info.absoluteResourcePath).replace(/\\/g, `/`),
           // Avoid React cross-origin errors
@@ -137,8 +138,12 @@ module.exports = async (
         }
       case `build-javascript`:
         return {
-          filename: `[name]-[contenthash].${customOptions.modern ? 'mjs' : 'js'}`,
-          chunkFilename: `[name]-[contenthash].${customOptions.modern ? 'mjs' : 'js'}`,
+          filename: `[name]-[contenthash].${
+            customOptions.modern ? `mjs` : `js`
+          }`,
+          chunkFilename: `[name]-[contenthash].${
+            customOptions.modern ? `mjs` : `js`
+          }`,
           path: directoryPath(`public`),
           publicPath: program.prefixPaths
             ? `${store.getState().config.pathPrefix}/`

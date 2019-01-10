@@ -236,7 +236,9 @@ export default (pagePath, callback) => {
   scriptsAndStyles = uniqBy(scriptsAndStyles, item => item.name)
 
   const scripts = scriptsAndStyles.filter(
-    script => script.name && (script.name.endsWith(`.js`) || script.name.endsWith(`.mjs`))
+    script =>
+      script.name &&
+      (script.name.endsWith(`.js`) || script.name.endsWith(`.mjs`))
   )
   const styles = scriptsAndStyles.filter(
     style => style.name && style.name.endsWith(`.css`)
